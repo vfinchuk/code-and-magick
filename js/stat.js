@@ -7,15 +7,19 @@ var CLOUD_X = 100;
 var CLOUD_Y = 10;
 var GAP = 10;
 
+var FONT_SIZE = 16;
+var FONT_FAMILY = ' PT Mono';
+
 var TEXT_COLOR = '#000';
+var TITLE_MARGIN_LEFT = 30;
+var TITLE_MARGIN_TOP = 20;
+var TITLE_GAP = 10;
 
-var TEXT_GAP_X = 30;
-var TEXT_GAP_Y = 20;
-
-var BAR_WIDTH = 40;
-var BAR_MARGIN = 50;
 var BAR_HEIGHT = 150;
+var BAR_WIDTH = 40;
+var BAR_COL_GAP = 50;
 
+var BAR_MARGIN_TOP = CLOUD_Y + TITLE_MARGIN_TOP + FONT_SIZE * 2 + TITLE_GAP * 3;
 
 function renderCloud(ctx, x, y, color) {
   ctx.fillStyle = color;
@@ -23,7 +27,7 @@ function renderCloud(ctx, x, y, color) {
 }
 
 function renderCloudText(ctx, x, y, text, color) {
-  ctx.font = "16px PT Mono";
+  ctx.font = FONT_SIZE + "px " + FONT_FAMILY;
   ctx.textBaseline = 'hanging';
   ctx.fillStyle = color;
   ctx.fillText(text, x, y);
@@ -56,8 +60,17 @@ window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
 
   // stat title rendering
-  renderCloudText(ctx, (CLOUD_X + TEXT_GAP_X), (CLOUD_Y + TEXT_GAP_Y), 'Ура вы победили!', TEXT_COLOR);
-  renderCloudText(ctx, (CLOUD_X + TEXT_GAP_X), (CLOUD_Y + (TEXT_GAP_Y * 2)), 'Список результатов:', TEXT_COLOR);
+  renderCloudText(ctx,
+    CLOUD_X + TITLE_MARGIN_LEFT,
+    CLOUD_Y + TITLE_MARGIN_TOP,
+    'Ура вы победили!',
+    TEXT_COLOR);
+
+  renderCloudText(ctx,
+    CLOUD_X + TITLE_MARGIN_LEFT,
+    CLOUD_Y + TITLE_MARGIN_TOP + FONT_SIZE + TITLE_GAP,
+    'Список результатов:',
+    TEXT_COLOR);
 
 
   for (var i = 0; i < names.length; i++) {
@@ -65,10 +78,22 @@ window.renderStatistics = function (ctx, names, times) {
     var maxTime = getMaxElement(times);
     var time = parseInt(times[i], times);
 
-    renderCloudText(ctx, (CLOUD_X + BAR_MARGIN) + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + (TEXT_GAP_Y * 3) + GAP, time, TEXT_COLOR);
+    renderCloudText(ctx,
+      (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
+      CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + BAR_MARGIN_TOP - FONT_SIZE,
+      time,
+      TEXT_COLOR);
 
-    renderCloudBar(ctx, (CLOUD_X + BAR_MARGIN) + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + (TEXT_GAP_Y * 4) + GAP, (BAR_HEIGHT * time) / maxTime, barBackground);
+    renderCloudBar(ctx,
+      (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
+      CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + BAR_MARGIN_TOP,
+      (BAR_HEIGHT * time) / maxTime,
+      barBackground);
 
-    renderCloudText(ctx, (CLOUD_X + BAR_MARGIN) + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_Y + (BAR_HEIGHT) + (TEXT_GAP_Y * 5), names[i], TEXT_COLOR);
+    renderCloudText(ctx,
+      (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
+      CLOUD_Y + (BAR_HEIGHT) + BAR_MARGIN_TOP + TITLE_GAP,
+      names[i],
+      TEXT_COLOR);
   }
 };
