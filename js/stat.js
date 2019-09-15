@@ -76,7 +76,7 @@ window.renderStatistics = function (ctx, names, times) {
   for (var i = 0; i < names.length; i++) {
     var barBackground = names[i] !== 'Вы' ? 'rgba(31, 58, 147, 0.' + parseInt(getRandomArbitrary(5, 10), 10) + ')' : 'rgba(255, 0, 0, 1)';
     var maxTime = getMaxElement(times);
-    var time = parseInt(times[i], times);
+    var time = parseInt(times[i], 10);
 
     renderCloudText(ctx,
       (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
