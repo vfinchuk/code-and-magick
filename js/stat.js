@@ -12,8 +12,9 @@ var TEXT_COLOR = '#000';
 var TEXT_GAP_X = 30;
 var TEXT_GAP_Y = 20;
 
-var BAR_WIDTH = 50;
-var BAR_HEIGHT = 180;
+var BAR_WIDTH = 40;
+var BAR_MARGIN = 50;
+var BAR_HEIGHT = 150;
 
 
 function renderCloud(ctx, x, y, color) {
@@ -61,13 +62,13 @@ window.renderStatistics = function (ctx, names, times) {
 
   for (var i = 0; i < names.length; i++) {
     var barBackground = names[i] !== 'Вы' ? 'rgba(31, 58, 147, 0.' + parseInt(getRandomArbitrary(5, 10), 10) + ')' : 'rgba(255, 0, 0, 1)';
-    console.log(getRandomArbitrary(3, 10));
     var maxTime = getMaxElement(times);
     var time = parseInt(times[i], times);
 
+    renderCloudText(ctx, (CLOUD_X + BAR_MARGIN) + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + (TEXT_GAP_Y * 3) + GAP, time, TEXT_COLOR);
 
-    renderCloudText(ctx, CLOUD_X + BAR_WIDTH + (BAR_WIDTH * 2 * i), CLOUD_HEIGHT - (((BAR_HEIGHT * time) / maxTime)), parseInt(time, 10), TEXT_COLOR);
-    renderCloudBar(ctx, CLOUD_X + BAR_WIDTH + (BAR_WIDTH * 2 * i), CLOUD_HEIGHT - (((BAR_HEIGHT * time) / maxTime)) + TEXT_GAP_Y, ((BAR_HEIGHT * time) / maxTime) - (TEXT_GAP_Y * 2) - GAP - TEXT_GAP_Y, barBackground);
-    renderCloudText(ctx, CLOUD_X + BAR_WIDTH + (BAR_WIDTH * 2 * i), CLOUD_HEIGHT - TEXT_GAP_Y - GAP, names[i], TEXT_COLOR);
+    renderCloudBar(ctx, (CLOUD_X + BAR_MARGIN) + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + (TEXT_GAP_Y * 4) + GAP, (BAR_HEIGHT * time) / maxTime, barBackground);
+
+    renderCloudText(ctx, (CLOUD_X + BAR_MARGIN) + (BAR_WIDTH + BAR_MARGIN) * i, CLOUD_Y + (BAR_HEIGHT) + (TEXT_GAP_Y * 5), names[i], TEXT_COLOR);
   }
 };
