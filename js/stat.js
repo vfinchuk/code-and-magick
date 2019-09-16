@@ -1,6 +1,6 @@
 'use strict';
 
-//stat settings
+//  stat settings
 var CLOUD_WIDTH = 420;
 var CLOUD_HEIGHT = 270;
 var CLOUD_X = 100;
@@ -27,7 +27,7 @@ function renderCloud(ctx, x, y, color) {
 }
 
 function renderCloudText(ctx, x, y, text, color) {
-  ctx.font = FONT_SIZE + "px " + FONT_FAMILY;
+  ctx.font = FONT_SIZE + 'px ' + FONT_FAMILY;
   ctx.textBaseline = 'hanging';
   ctx.fillStyle = color;
   ctx.fillText(text, x, y);
@@ -61,16 +61,16 @@ window.renderStatistics = function (ctx, names, times) {
 
   // stat title rendering
   renderCloudText(ctx,
-    CLOUD_X + TITLE_MARGIN_LEFT,
-    CLOUD_Y + TITLE_MARGIN_TOP,
-    'Ура вы победили!',
-    TEXT_COLOR);
+      CLOUD_X + TITLE_MARGIN_LEFT,
+      CLOUD_Y + TITLE_MARGIN_TOP,
+      'Ура вы победили!',
+      TEXT_COLOR);
 
   renderCloudText(ctx,
-    CLOUD_X + TITLE_MARGIN_LEFT,
-    CLOUD_Y + TITLE_MARGIN_TOP + FONT_SIZE + TITLE_GAP,
-    'Список результатов:',
-    TEXT_COLOR);
+      CLOUD_X + TITLE_MARGIN_LEFT,
+      CLOUD_Y + TITLE_MARGIN_TOP + FONT_SIZE + TITLE_GAP,
+      'Список результатов:',
+      TEXT_COLOR);
 
 
   for (var i = 0; i < names.length; i++) {
@@ -79,21 +79,21 @@ window.renderStatistics = function (ctx, names, times) {
     var time = parseInt(times[i], 10);
 
     renderCloudText(ctx,
-      (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
-      CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + BAR_MARGIN_TOP - FONT_SIZE,
-      time,
-      TEXT_COLOR);
+        (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
+        CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + BAR_MARGIN_TOP - FONT_SIZE,
+        time,
+        TEXT_COLOR);
 
     renderCloudBar(ctx,
-      (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
-      CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + BAR_MARGIN_TOP,
-      (BAR_HEIGHT * time) / maxTime,
-      barBackground);
+        (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
+        CLOUD_Y + (BAR_HEIGHT - ((BAR_HEIGHT * time) / maxTime)) + BAR_MARGIN_TOP,
+        (BAR_HEIGHT * time) / maxTime,
+        barBackground);
 
     renderCloudText(ctx,
-      (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
-      CLOUD_Y + (BAR_HEIGHT) + BAR_MARGIN_TOP + TITLE_GAP,
-      names[i],
-      TEXT_COLOR);
+        (CLOUD_X + BAR_COL_GAP) + (BAR_WIDTH + BAR_COL_GAP) * i,
+        CLOUD_Y + (BAR_HEIGHT) + BAR_MARGIN_TOP + TITLE_GAP,
+        names[i],
+        TEXT_COLOR);
   }
 };
